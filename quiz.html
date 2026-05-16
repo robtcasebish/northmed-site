@@ -172,6 +172,7 @@ p.lead{font-size:1.05rem;color:#4A5E4F;line-height:1.78;max-width:560px;font-wei
 .quiz-input{width:100%;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:0.875rem 1rem;color:var(--white);font-family:var(--font-body);font-size:0.95rem;margin-bottom:0.75rem;transition:border-color 0.2s;outline:none;}
 .quiz-input:focus{border-color:var(--fern);}
 .quiz-input::placeholder{color:rgba(255,255,255,0.3);}
+.quiz-input option{color:#1a1a1a;background:white;}
 .quiz-footer{padding:1.5rem 2rem;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;gap:1rem;}
 .quiz-footer .step-count{font-size:0.8rem;color:rgba(255,255,255,0.3);}
 .btn-quiz-next{background:var(--amber);color:var(--white);border:none;padding:0.75rem 2rem;border-radius:100px;font-family:var(--font-body);font-size:0.9rem;font-weight:600;cursor:pointer;transition:background 0.25s,transform 0.25s;}
@@ -191,6 +192,15 @@ p.lead{font-size:1.05rem;color:#4A5E4F;line-height:1.78;max-width:560px;font-wei
   <ul class="nav-links"><li><a href="weight-loss.html">Weight Loss</a></li><li><a href="mens-health.html">Men's Health</a></li><li><a href="womens-health.html">Women's Health</a></li><li><a href="index.html#how-it-works">How It Works</a></li></ul>
   <button class="nav-cta" onclick="window.location='quiz.html'">Get Started</button>
 </nav>
+<div id="disclaimer-banner" style="background:#1a3a24;border-bottom:1px solid rgba(46,138,84,0.3);padding:0.65rem 2rem;text-align:center;position:relative;z-index:300;">
+  <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);margin:0;line-height:1.5;">
+    <strong style="color:rgba(255,255,255,0.85);">Medical Information Only.</strong>
+    This website provides general health information to help you speak with a licensed physician. 
+    It does not constitute medical advice, diagnosis, or a recommendation for any specific treatment or medication. 
+    All treatment decisions are made solely by independent licensed Canadian physicians following individual consultation.
+    &nbsp;<a href="medical-consent.html" style="color:var(--amber-light);text-decoration:none;">Learn more &#8594;</a>
+  </p>
+</div>
 
 <div class="quiz-shell">
   <div class="quiz-card">

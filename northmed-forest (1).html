@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NorthMed | Personalized Telehealth Care for Canadians</title>
+<meta name="description" content="Clinician-guided telehealth from NorthMed. Weight loss, men's health, women's health, and more, designed for Canadians.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest-deep:  #071810;
+  --forest-dark:  #0C2A1A;
+  --forest:       #174D2E;
+  --forest-mid:   #1E6B3E;
+  --fern:         #2E8A54;
+  --moss:         #4DAA72;
+  --mist:         #E6F0EA;
+  --cream:        #F4EEE2;
+  --cream-dark:   #E8E0D0;
+  --bark:         #3D2210;
+  --bark-light:   #6B4A2A;
+  --amber:        #C2882A;
+  --amber-light:  #E8B55A;
+  --white:        #FFFFFF;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Plus Jakarta Sans', sans-serif;
+  --radius:       12px;
+  --radius-lg:    20px;
+  --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--forest-dark);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ─── FLOATING LEAVES ─── */
+.leaves-canvas {
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none; overflow: hidden;
+}
+.leaf {
+  position: absolute;
+  top: -60px;
+  opacity: 0;
+  animation: leafFall linear infinite;
+}
+@keyframes leafFall {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg);   opacity: 0; }
+  5%   { opacity: 0.55; }
+  95%  { opacity: 0.35; }
+  100% { transform: translateY(110vh) translateX(var(--drift)) rotate(var(--spin)); opacity: 0; }
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 4rem;
+  transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+nav.scrolled {
+  background: rgba(7, 24, 16, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.85rem; font-weight: 600;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.nav-logo-icon { width: 28px; height: 28px; flex-shrink: 0; }
+.nav-logo span { color: var(--amber-light); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none; font-size: 0.875rem; font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--amber); color: var(--white); border: none;
+  padding: 0.6rem 1.5rem; border-radius: 100px;
+  font-family: var(--font-body); font-size: 0.875rem; font-weight: 600;
+  cursor: pointer; transition: background 0.25s, transform 0.25s;
+  letter-spacing: 0.02em;
+}
+.nav-cta:hover { background: var(--amber-light); transform: scale(1.04); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  background: var(--forest-deep);
+  position: relative;
+  display: flex; flex-direction: column;
+  justify-content: center; overflow: hidden;
+}
+
+/* Stars */
+.hero-stars {
+  position: absolute; inset: 0; z-index: 0;
+}
+.star {
+  position: absolute; border-radius: 50%;
+  background: white; animation: twinkle ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50%       { opacity: 0.8;  transform: scale(1.4); }
+}
+
+/* Aurora */
+.aurora {
+  position: absolute; inset: 0; z-index: 1; overflow: hidden;
+}
+.aurora-band {
+  position: absolute; left: -20%; right: -20%;
+  border-radius: 50%;
+  filter: blur(60px);
+  mix-blend-mode: screen;
+  animation: auroraDrift ease-in-out infinite alternate;
+  opacity: 0.18;
+}
+.aurora-band-1 {
+  top: 5%; height: 35%;
+  background: radial-gradient(ellipse, #00c97a 0%, #00a86b 40%, transparent 70%);
+  animation-duration: 14s; animation-delay: 0s;
+}
+.aurora-band-2 {
+  top: 10%; height: 40%;
+  background: radial-gradient(ellipse, #00e5a0 0%, #1adba2 30%, transparent 65%);
+  animation-duration: 18s; animation-delay: -5s;
+  opacity: 0.12;
+}
+.aurora-band-3 {
+  top: 0%; height: 50%;
+  background: radial-gradient(ellipse, #5bb8a0 0%, transparent 60%);
+  animation-duration: 22s; animation-delay: -9s;
+  opacity: 0.1;
+}
+@keyframes auroraDrift {
+  0%   { transform: translateX(-8%) scaleY(1) skewX(-3deg); opacity: 0.13; }
+  33%  { transform: translateX(5%)  scaleY(1.1) skewX(2deg);  opacity: 0.22; }
+  66%  { transform: translateX(-3%) scaleY(0.9) skewX(-1deg); opacity: 0.16; }
+  100% { transform: translateX(8%)  scaleY(1.05) skewX(3deg); opacity: 0.20; }
+}
+
+/* Hero content */
+.hero-content {
+  position: relative; z-index: 3;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+  max-width: 1280px; margin: 0 auto;
+  padding: 8rem 4rem 14rem; width: 100%;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(200, 136, 42, 0.15);
+  border: 1px solid rgba(200, 136, 42, 0.35);
+  color: var(--amber-light);
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.4rem 1rem; border-radius: 100px;
+  margin-bottom: 1.5rem; width: fit-content;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--amber);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(194,136,42,0.6); }
+  50%      { box-shadow: 0 0 0 5px rgba(194,136,42,0); }
+}
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5.2rem);
+  font-weight: 600; line-height: 1.06;
+  color: var(--white); letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+}
+h1 em { font-style: italic; color: var(--amber-light); }
+.hero-sub {
+  color: rgba(255,255,255,0.6);
+  font-size: 1.05rem; line-height: 1.78;
+  max-width: 480px; margin-bottom: 2.5rem; font-weight: 300;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.btn-primary {
+  background: var(--amber); color: var(--white);
+  padding: 0.875rem 2rem; border-radius: 100px;
+  font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.25s, transform 0.25s; display: inline-block;
+}
+.btn-primary:hover { background: var(--amber-light); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; color: var(--white);
+  padding: 0.875rem 2rem; border-radius: 100px;
+  font-family: var(--font-body); font-size: 0.95rem; font-weight: 500;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.28); cursor: pointer;
+  transition: border-color 0.25s, background 0.25s; display: inline-block;
+}
+.btn-outline:hover { border-color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.06); }
+.hero-trust { display: flex; gap: 2rem; flex-wrap: wrap; }
+.trust-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  color: rgba(255,255,255,0.45); font-size: 0.8rem; font-weight: 500;
+}
+.trust-check {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(78, 160, 120, 0.3); border: 1px solid var(--moss);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.trust-check svg { width: 8px; height: 8px; stroke: var(--moss); }
+
+/* Hero card panel */
+.hero-right { position: relative; }
+.hero-panel {
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 2rem; backdrop-filter: blur(10px);
+}
+.hero-panel h3 {
+  font-family: var(--font-display); font-size: 1.45rem; font-weight: 500;
+  color: var(--white); margin-bottom: 1.25rem; letter-spacing: -0.01em;
+}
+.service-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.pill {
+  padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+  cursor: pointer; border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.6); background: transparent;
+  font-family: var(--font-body); transition: all 0.25s;
+}
+.pill.active, .pill:hover {
+  background: var(--forest-mid); border-color: var(--fern); color: var(--white);
+}
+.hero-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+.hero-stat {
+  text-align: center; padding: 1rem;
+  background: rgba(255,255,255,0.035);
+  border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.06);
+}
+.hero-stat-num {
+  font-family: var(--font-display); font-size: 1.7rem; font-weight: 600;
+  color: var(--amber-light); display: block;
+}
+.hero-stat-label {
+  font-size: 0.7rem; color: rgba(255,255,255,0.4); font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.hero-mini-card {
+  margin-top: 1rem;
+  background: var(--forest-mid);
+  border: 1px solid var(--fern);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.hero-mini-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 1.1rem;
+}
+.hero-mini-card p { font-size: 0.82rem; color: rgba(255,255,255,0.75); font-weight: 300; }
+.hero-mini-card strong { color: var(--white); font-weight: 600; display: block; font-size: 0.875rem; }
+
+/* ─── PINE TREE SILHOUETTES ─── */
+.forest-scape {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  z-index: 2; line-height: 0;
+}
+.forest-scape svg { display: block; width: 100%; }
+
+/* ─── WAVE DIVIDERS ─── */
+.wave-divider {
+  display: block; width: 100%; line-height: 0;
+  position: relative; z-index: 2;
+}
+.wave-divider svg { display: block; width: 100%; }
+
+/* ─── SECTION COMMON ─── */
+section { padding: 6rem 4rem; position: relative; overflow: hidden; }
+.container { max-width: 1280px; margin: 0 auto; }
+.section-label {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--fern);
+  margin-bottom: 0.75rem; display: block;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 3.2vw, 3.3rem);
+  font-weight: 600; line-height: 1.1;
+  color: var(--forest-dark); letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+h2 em { font-style: italic; color: var(--forest-mid); }
+.section-sub {
+  font-size: 1.02rem; color: #4A5E4F;
+  line-height: 1.78; max-width: 520px; font-weight: 300;
+}
+
+/* ─── TREE RING DECORATION ─── */
+.tree-rings {
+  position: absolute; border-radius: 50%;
+  border: 1px solid currentColor;
+  pointer-events: none; animation: ringBreath ease-in-out infinite alternate;
+}
+@keyframes ringBreath {
+  from { opacity: 0.04; transform: scale(1); }
+  to   { opacity: 0.09; transform: scale(1.015); }
+}
+
+/* ─── FERN DECORATION ─── */
+.fern-deco { position: absolute; pointer-events: none; opacity: 0.07; }
+
+/* ─── SERVICES STRIP ─── */
+.services-strip { background: var(--forest-dark); padding: 2.5rem 4rem; }
+.services-strip .container {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap;
+}
+.service-strip-item {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.5rem; text-decoration: none; cursor: pointer;
+  transition: transform 0.25s;
+}
+.service-strip-item:hover { transform: translateY(-4px); }
+.strip-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; border: 1px solid rgba(255,255,255,0.1);
+}
+.service-strip-item span {
+  font-size: 0.78rem; color: rgba(255,255,255,0.55);
+  font-weight: 500; text-align: center; letter-spacing: 0.02em;
+}
+.strip-divider { width: 1px; height: 56px; background: rgba(255,255,255,0.08); }
+
+/* ─── CANADA BAR ─── */
+.canada-bar { background: var(--forest); padding: 1.4rem 4rem; }
+.canada-bar .container {
+  display: flex; align-items: center; justify-content: center;
+  gap: 3rem; flex-wrap: wrap;
+}
+.canada-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  color: rgba(255,255,255,0.75); font-size: 0.82rem; font-weight: 500;
+}
+
+/* ─── FEATURE SECTIONS ─── */
+.feature-section {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.feature-section.reverse { direction: rtl; }
+.feature-section.reverse > * { direction: ltr; }
+.feature-visual {
+  border-radius: var(--radius-lg); overflow: hidden;
+  position: relative; aspect-ratio: 3/4; max-height: 520px;
+}
+.feature-visual-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+/* Each service visual */
+.vis-glp     { background: linear-gradient(145deg, #071a0e 0%, #0e3d20 50%, #061510 100%); }
+.vis-womens  { background: linear-gradient(145deg, #1a0d28 0%, #3d1a5a 50%, #160a22 100%); }
+.vis-mens    { background: linear-gradient(145deg, #071018 0%, #0f2840 50%, #060e18 100%); }
+.vis-peptide { background: linear-gradient(145deg, #14110a 0%, #3d350e 50%, #100e08 100%); }
+.vis-hair    { background: linear-gradient(145deg, #110828 0%, #3a1070 50%, #0c0620 100%); }
+.vis-skin    { background: linear-gradient(145deg, #1a0806 0%, #5c1a10 50%, #140604 100%); }
+
+.vis-forest-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  animation: ringGrow linear infinite;
+}
+@keyframes ringGrow {
+  0%   { transform: scale(0.8); opacity: 0.4; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.vis-glow {
+  position: absolute; border-radius: 50%;
+  filter: blur(40px); pointer-events: none;
+}
+.vis-emoji { font-size: 4.5rem; position: relative; z-index: 1; filter: drop-shadow(0 0 24px rgba(255,255,255,0.15)); }
+.feature-badge-float {
+  position: absolute; bottom: 1.25rem; left: 1.25rem; right: 1.25rem;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius); padding: 1rem 1.25rem; z-index: 2;
+}
+.feature-badge-float p { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 0.35rem; }
+.fbf-title { font-family: var(--font-display); font-size: 1.05rem; color: var(--white); font-weight: 500; }
+
+/* Checklist */
+.feature-checklist { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin: 2rem 0; }
+.feature-checklist li {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  font-size: 0.94rem; color: #3d5245; line-height: 1.55;
+}
+.check-icon {
+  width: 20px; height: 20px; border-radius: 50%; background: var(--forest-mid);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.check-icon svg { width: 10px; height: 10px; }
+.feature-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+.feature-tag {
+  padding: 0.38rem 0.9rem; border-radius: 100px;
+  background: var(--mist); color: var(--forest);
+  font-size: 0.78rem; font-weight: 500;
+  border: 1px solid rgba(23,77,46,0.18);
+}
+
+/* Dark section overrides */
+.dark-section { background: var(--forest-deep); }
+.dark-section h2 { color: var(--white); }
+.dark-section h2 em { color: var(--amber-light); }
+.dark-section .section-label { color: var(--amber-light); }
+.dark-section .section-sub { color: rgba(255,255,255,0.5); }
+.dark-section .feature-tag { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.1); }
+.dark-section .feature-checklist li { color: rgba(255,255,255,0.6); }
+.mid-section { background: var(--mist); }
+
+/* ─── HOW IT WORKS ─── */
+.how-section { background: var(--forest-dark); }
+.steps-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1.5rem; margin-top: 4rem; position: relative;
+}
+.steps-connector {
+  position: absolute; top: 24px; left: calc(12.5% + 24px); right: calc(12.5% + 24px);
+  height: 1px; background: rgba(255,255,255,0.07);
+  z-index: 0;
+}
+.step-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg); padding: 2rem 1.5rem;
+  position: relative; z-index: 1;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.step-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-5px); }
+.step-num {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--forest-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1.3rem; font-weight: 600;
+  color: var(--white); margin-bottom: 1.5rem;
+}
+.step-card h3 {
+  font-family: var(--font-display); font-size: 1.25rem; font-weight: 500;
+  color: var(--white); margin-bottom: 0.75rem; letter-spacing: -0.01em;
+}
+.step-card p { font-size: 0.87rem; color: rgba(255,255,255,0.45); line-height: 1.72; font-weight: 300; }
+
+/* ─── TESTIMONIALS ─── */
+.testimonials-section { background: var(--cream-dark); }
+.testimonials-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;
+}
+.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.review-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  padding: 1.75rem; border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative; overflow: hidden;
+}
+.review-card::before {
+  content: '\201C';
+  position: absolute; top: -0.5rem; right: 1.25rem;
+  font-family: var(--font-display); font-size: 6rem; font-weight: 700;
+  color: var(--mist); line-height: 1; pointer-events: none;
+}
+.review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(7,24,16,0.08); }
+.review-stars { display: flex; gap: 3px; margin-bottom: 1rem; color: var(--amber); }
+.review-text {
+  font-size: 0.9rem; color: #4A5E4F; line-height: 1.78;
+  margin-bottom: 1.25rem; font-weight: 300; position: relative; z-index: 1;
+}
+.review-author { display: flex; align-items: center; gap: 0.75rem; }
+.review-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; font-weight: 600; color: var(--white); flex-shrink: 0;
+}
+.review-author-info strong { display: block; font-size: 0.875rem; font-weight: 600; color: var(--forest-dark); }
+.review-author-info span { font-size: 0.78rem; color: #7A8E80; }
+
+/* ─── TRUST BAR ─── */
+.trust-bar { background: var(--cream); padding: 3rem 4rem; border-top: 1px solid var(--cream-dark); }
+.trust-bar .container { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
+.trust-bar-item { display: flex; align-items: center; gap: 1rem; }
+.trust-bar-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--mist); display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0; border: 1px solid rgba(23,77,46,0.12);
+}
+.trust-bar-text strong { display: block; font-size: 0.9rem; font-weight: 600; color: var(--forest-dark); margin-bottom: 0.2rem; }
+.trust-bar-text span { font-size: 0.8rem; color: #6A7D70; font-weight: 300; }
+
+/* ─── FOOTER ─── */
+footer { background: var(--forest-deep); color: rgba(255,255,255,0.45); padding: 4rem 4rem 2rem; position: relative; overflow: hidden; }
+.footer-fern { position: absolute; bottom: 0; right: 0; opacity: 0.05; pointer-events: none; }
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 3rem;
+  max-width: 1280px; margin-left: auto; margin-right: auto;
+}
+.footer-logo {
+  font-family: var(--font-display); font-size: 2rem; font-weight: 600;
+  color: var(--white); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+  letter-spacing: -0.02em;
+}
+.footer-logo span { color: var(--amber-light); }
+.footer-desc {
+  font-size: 0.85rem; line-height: 1.75; color: rgba(255,255,255,0.35);
+  font-weight: 300; margin-bottom: 1.5rem; max-width: 280px;
+}
+.footer-contact-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.82rem; margin-bottom: 0.5rem; color: rgba(255,255,255,0.4);
+}
+.footer-contact-item a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-contact-item a:hover { color: rgba(255,255,255,0.7); }
+.footer-col h4 {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1.25rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.7rem; }
+.footer-col ul li a {
+  font-size: 0.875rem; color: rgba(255,255,255,0.4);
+  text-decoration: none; transition: color 0.2s; font-weight: 300;
+}
+.footer-col ul li a:hover { color: rgba(255,255,255,0.75); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+  max-width: 1280px; margin: 0 auto;
+}
+.footer-bottom p { font-size: 0.78rem; }
+.footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-legal a {
+  font-size: 0.78rem; color: rgba(255,255,255,0.3);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-legal a:hover { color: rgba(255,255,255,0.6); }
+.footer-disclaimer {
+  max-width: 1280px; margin: 2rem auto 0;
+  padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.7rem; color: rgba(255,255,255,0.2); line-height: 1.7;
+}
+.coming-soon {
+  display: inline-block; background: var(--amber); color: var(--white);
+  font-size: 0.67rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 0.22rem 0.55rem; border-radius: 4px;
+  margin-left: 0.4rem; vertical-align: middle;
+}
+
+/* ─── FADE IN ─── */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+.fd1 { transition-delay: 0.1s; } .fd2 { transition-delay: 0.2s; }
+.fd3 { transition-delay: 0.3s; } .fd4 { transition-delay: 0.4s; }
+
+@media (max-width: 1024px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .services-strip, .canada-bar, .trust-bar { padding: 2rem 1.5rem; }
+  .hero-content { grid-template-columns: 1fr; padding: 7rem 1.5rem 12rem; }
+  .hero-right { display: none; }
+  .feature-section { grid-template-columns: 1fr; gap: 2.5rem; }
+  .feature-section.reverse { direction: ltr; }
+  .feature-visual { max-height: 280px; aspect-ratio: 16/9; }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .trust-bar .container { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Floating leaves canvas -->
+<div class="leaves-canvas" id="leavesCanvas"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 28 28" fill="none">
+      <path d="M14 2 L14 6 M14 6 C14 6 8 9 6 14 C4 19 7 23 14 25 C21 23 24 19 22 14 C20 9 14 6 14 6Z" stroke="rgba(232,181,90,0.8)" stroke-width="1.5" fill="none"/>
+      <path d="M14 10 L14 25" stroke="rgba(232,181,90,0.5)" stroke-width="1"/>
+      <path d="M10 14 L18 14 M9 18 L19 18 M11 22 L17 22" stroke="rgba(232,181,90,0.35)" stroke-width="0.8"/>
+    </svg>
+    North<span>Med</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="weight-loss.html">Weight Loss</a></li>
+    <li><a href="mens-health.html">Men's Health</a></li>
+    <li><a href="womens-health.html">Women's Health</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('weight-loss').scrollIntoView({behavior:'smooth'})">Get Started</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-stars" id="heroStars"></div>
+  <div class="aurora">
+    <div class="aurora-band aurora-band-1"></div>
+    <div class="aurora-band aurora-band-2"></div>
+    <div class="aurora-band aurora-band-3"></div>
+  </div>
+
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">🍁 Trusted by 100,000+ Canadians</div>
+      <h1>Healthcare,<br><em>reimagined</em><br>for real life.</h1>
+      <p class="hero-sub">Medical care online to simple, direct, and led by licensed Canadian providers. No waiting rooms. No unnecessary steps. Real care that works, delivered to your door.</p>
+      <div class="hero-actions">
+        <a href="weight-loss.html" class="btn-primary">Explore Services</a>
+        <a href="#how-it-works" class="btn-outline">How It Works</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <div class="trust-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Licensed Canadian Physicians
+        </div>
+        <div class="trust-item">
+          <div class="trust-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Health Canada Regulated
+        </div>
+        <div class="trust-item">
+          <div class="trust-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          Shipped Coast to Coast
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-panel">
+        <h3>What would you like help with?</h3>
+        <div class="service-pills">
+          <button class="pill active">Weight Loss</button>
+          <button class="pill">Men's Health</button>
+          <button class="pill">Women's Health</button>
+          <button class="pill">Hair Loss</button>
+          <button class="pill">Skincare</button>
+          <button class="pill">Peptide Therapy</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="hero-stat-num">100K+</span><span class="hero-stat-label">Patients</span></div>
+          <div class="hero-stat"><span class="hero-stat-num">10</span><span class="hero-stat-label">Provinces</span></div>
+          <div class="hero-stat"><span class="hero-stat-num">4.9★</span><span class="hero-stat-label">Rating</span></div>
+        </div>
+        <div class="hero-mini-card">
+          <div class="hero-mini-icon">🚚</div>
+          <div>
+            <strong>Free shipping across Canada</strong>
+            <p>Discreet packaging, fast delivery</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pine tree forest silhouette -->
+  <div class="forest-scape" id="forestScape"></div>
+</section>
+
+<!-- SERVICES STRIP -->
+<div class="services-strip">
+  <div class="container">
+    <a href="weight-loss.html" class="service-strip-item">
+      <div class="strip-icon" style="background:rgba(30,107,62,0.2)">⚖️</div>
+      <span>Weight Loss</span>
+    </a>
+    <div class="strip-divider"></div>
+    <a href="mens-health.html" class="service-strip-item">
+      <div class="strip-icon" style="background:rgba(15,40,64,0.3)">💪</div>
+      <span>Men's Health</span>
+    </a>
+    <div class="strip-divider"></div>
+    <a href="womens-health.html" class="service-strip-item">
+      <div class="strip-icon" style="background:rgba(61,26,90,0.25)">🌸</div>
+      <span>Women's Health</span>
+    </a>
+    <div class="strip-divider"></div>
+    <a href="peptides.html" class="service-strip-item">
+      <div class="strip-icon" style="background:rgba(61,53,14,0.3)">🔬</div>
+      <span>Peptides & Longevity</span>
+    </a>
+    <div class="strip-divider"></div>
+    <a href="hair-restoration.html" class="service-strip-item">
+      <div class="strip-icon" style="background:rgba(58,16,112,0.25)">💆</div>
+      <span>Hair Restoration</span>
+    </a>
+    <div class="strip-divider"></div>
+    <a href="#skin" class="service-strip-item">
+      <div class="strip-icon" style="background:rgba(92,26,16,0.25)">✨</div>
+      <span>Skincare</span>
+    </a>
+  </div>
+</div>
+
+<!-- CANADA BAR -->
+<div class="canada-bar">
+  <div class="container">
+    <div class="canada-item">🍁 <strong style="color:white;margin-right:4px">Health Canada</strong> regulated medications</div>
+    <div class="canada-item">🏥 Provincially licensed physicians in all provinces</div>
+    <div class="canada-item">🔒 PIPEDA compliant privacy protection</div>
+    <div class="canada-item">📦 Ships to all 10 provinces &amp; 3 territories</div>
+  </div>
+</div>
+
+<!-- wave down from canada bar -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 C240,48 480,0 720,24 C960,48 1200,0 1440,24 L1440,0 Z" fill="#1E6B3E"/>
+    <rect x="0" y="24" width="1440" height="24" fill="#F4EEE2"/>
+    <path d="M0,0 C240,48 480,0 720,24 C960,48 1200,0 1440,24 L1440,48 L0,48 Z" fill="#F4EEE2"/>
+  </svg>
+</div>
+
+<!-- WEIGHT LOSS -->
+<section id="weight-loss" style="background:var(--cream); padding-top: 4rem;">
+  <!-- Decorative tree rings -->
+  <div class="tree-rings" style="width:600px;height:600px;top:-100px;right:-150px;color:var(--forest);animation-duration:8s;"></div>
+  <div class="tree-rings" style="width:420px;height:420px;top:-30px;right:-80px;color:var(--forest);animation-duration:12s;animation-delay:-3s;"></div>
+  <div class="tree-rings" style="width:240px;height:240px;top:50px;right:10px;color:var(--forest);animation-duration:10s;animation-delay:-6s;"></div>
+  <!-- Decorative fern SVG -->
+  <svg class="fern-deco" style="top:-20px;left:-40px;width:280px;height:280px;" viewBox="0 0 280 280" fill="none">
+    <path d="M140,260 C140,260 140,100 140,60" stroke="#174D2E" stroke-width="3" stroke-linecap="round"/>
+    <path d="M140,200 C120,180 80,185 60,165" stroke="#174D2E" stroke-width="2" stroke-linecap="round"/>
+    <path d="M140,180 C160,160 200,165 220,145" stroke="#174D2E" stroke-width="2" stroke-linecap="round"/>
+    <path d="M140,160 C125,140 90,145 75,125" stroke="#174D2E" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M140,140 C155,120 190,125 205,105" stroke="#174D2E" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M140,120 C128,102 100,107 88,88" stroke="#174D2E" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M140,100 C152,82 180,87 192,68" stroke="#174D2E" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M60,165 C55,155 50,148 45,142 M60,165 C65,153 68,145 65,135" stroke="#174D2E" stroke-width="1" stroke-linecap="round"/>
+    <path d="M220,145 C225,135 230,128 235,122 M220,145 C215,133 212,125 215,115" stroke="#174D2E" stroke-width="1" stroke-linecap="round"/>
+  </svg>
+  <div class="container">
+    <div class="feature-section fade-in">
+      <div class="feature-visual">
+        <div class="feature-visual-inner vis-glp">
+          <div class="vis-glow" style="width:200px;height:200px;background:rgba(46,138,84,0.4);top:20%;left:20%;"></div>
+          <div class="vis-forest-ring" style="width:180px;height:180px;animation-duration:4s;"></div>
+          <div class="vis-forest-ring" style="width:130px;height:130px;animation-duration:4s;animation-delay:-2s;"></div>
+          <div class="vis-emoji">⚖️</div>
+          <div class="feature-badge-float">
+            <p>Doctor-guided GLP-1 care</p>
+            <div class="fbf-title">Average 15–20% body weight loss</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="section-label">Weight Loss: GLP-1 Therapy</span>
+        <h2>Weight loss made <em>easy</em> with personalized care</h2>
+        <p class="section-sub">Find the right GLP-1 medication with the confidence that comes from knowing it is doctor-approved and budget-friendly to designed specifically for Canadians.</p>
+        <ul class="feature-checklist">
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Prescription to effective GLP-1 medications (semaglutide, tirzepatide)</li>
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>1:1 physician guidance from a licensed Canadian doctor</li>
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Free registered dietitian visits included*</li>
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>24/7 care support to text or call anytime</li>
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Fast, discreet shipping from Canadian pharmacies</li>
+        </ul>
+        <div class="feature-tags">
+          <span class="feature-tag">Semaglutide</span><span class="feature-tag">Tirzepatide</span>
+          <span class="feature-tag">Compounded GLP-1</span><span class="feature-tag">Dietitian Support</span>
+          <span class="feature-tag">All Provinces</span>
+        </div>
+        <a href="#" class="btn-primary" style="margin-top:2rem;display:inline-block;">Get Started: Weight Loss</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave into dark -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,60 C360,0 720,60 1080,20 C1260,0 1380,40 1440,30 L1440,60 Z" fill="#F4EEE2"/>
+    <path d="M0,60 C360,0 720,60 1080,20 C1260,0 1380,40 1440,30 L1440,0 L0,0 Z" fill="#071810"/>
+  </svg>
+</div>
+
+<!-- WOMEN'S HEALTH -->
+<section id="womens-health" class="dark-section" style="padding-top:4rem;">
+  <div class="tree-rings" style="width:500px;height:500px;top:50px;left:-100px;color:rgba(255,255,255,1);animation-duration:11s;"></div>
+  <div class="tree-rings" style="width:340px;height:340px;top:120px;left:-40px;color:rgba(255,255,255,1);animation-duration:9s;animation-delay:-4s;"></div>
+  <svg class="fern-deco" style="bottom:-20px;right:-30px;width:240px;height:300px;transform:scaleX(-1) rotate(15deg);" viewBox="0 0 240 300" fill="none">
+    <path d="M120,280 C120,280 120,80 120,40" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M120,200 C100,180 60,185 40,160" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <path d="M120,170 C140,150 180,155 200,130" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <path d="M120,140 C104,122 70,127 55,108" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M120,112 C136,94 170,99 185,80" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M120,85 C108,68 82,73 70,55" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+  <div class="container">
+    <div class="feature-section reverse fade-in">
+      <div class="feature-visual">
+        <div class="feature-visual-inner vis-womens">
+          <div class="vis-glow" style="width:180px;height:180px;background:rgba(120,40,180,0.4);top:25%;left:25%;"></div>
+          <div class="vis-forest-ring" style="width:160px;height:160px;animation-duration:5s;"></div>
+          <div class="vis-forest-ring" style="width:110px;height:110px;animation-duration:5s;animation-delay:-2.5s;"></div>
+          <div class="vis-emoji">🌸</div>
+          <div class="feature-badge-float">
+            <p>Care designed for women's health</p>
+            <div class="fbf-title">Whole-body balance, vitality &amp; confidence</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="section-label">Women's Health</span>
+        <h2>Whole-body care for <em>her</em> balance and vitality</h2>
+        <p class="section-sub">Doctor-guided care for weight, hormones, hair, and skin, with personalized treatment plans designed to support your health through every stage of life.</p>
+        <ul class="feature-checklist">
+          <li><div class="check-icon" style="background:#5a2d7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Hormone balance &amp; menopause support</li>
+          <li><div class="check-icon" style="background:#5a2d7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Healthy weight management programmes</li>
+          <li><div class="check-icon" style="background:#5a2d7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Hair strength &amp; growth support</li>
+          <li><div class="check-icon" style="background:#5a2d7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Skin health &amp; radiance treatments</li>
+        </ul>
+        <div class="feature-tags">
+          <span class="feature-tag">Hormone Therapy</span><span class="feature-tag">Menopause Care</span>
+          <span class="feature-tag">Thyroid Support</span><span class="feature-tag">Skin &amp; Hair</span>
+        </div>
+        <a href="#" class="btn-primary" style="margin-top:2rem;display:inline-block;background:#5a2d7a;">Learn More <span class="coming-soon">Coming Soon</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave up to cream -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 C360,60 720,0 1080,40 C1260,60 1380,20 1440,30 L1440,60 L0,60 Z" fill="#071810"/>
+    <path d="M0,0 C360,60 720,0 1080,40 C1260,60 1380,20 1440,30 L1440,0 Z" fill="#F4EEE2"/>
+  </svg>
+</div>
+
+<!-- MEN'S HEALTH -->
+<section id="mens-health" style="background:var(--cream);padding-top:4rem;">
+  <div class="tree-rings" style="width:550px;height:550px;bottom:-80px;left:-120px;color:var(--forest);animation-duration:9s;"></div>
+  <div class="tree-rings" style="width:360px;height:360px;bottom:0;left:-60px;color:var(--forest);animation-duration:13s;animation-delay:-5s;"></div>
+  <svg class="fern-deco" style="top:0;right:-20px;width:220px;height:280px;transform:rotate(-10deg);" viewBox="0 0 220 280" fill="none">
+    <path d="M110,260 C110,260 110,70 110,30" stroke="#174D2E" stroke-width="3" stroke-linecap="round"/>
+    <path d="M110,190 C90,170 55,178 35,155" stroke="#174D2E" stroke-width="2" stroke-linecap="round"/>
+    <path d="M110,160 C130,140 165,148 185,125" stroke="#174D2E" stroke-width="2" stroke-linecap="round"/>
+    <path d="M110,130 C95,112 62,120 45,98" stroke="#174D2E" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M110,100 C125,82 158,90 175,68" stroke="#174D2E" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M110,72 C98,55 72,63 58,42" stroke="#174D2E" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+  <div class="container">
+    <div class="feature-section fade-in">
+      <div class="feature-visual">
+        <div class="feature-visual-inner vis-mens">
+          <div class="vis-glow" style="width:180px;height:180px;background:rgba(30,80,180,0.4);top:22%;left:22%;"></div>
+          <div class="vis-forest-ring" style="width:160px;height:160px;animation-duration:6s;"></div>
+          <div class="vis-forest-ring" style="width:108px;height:108px;animation-duration:6s;animation-delay:-3s;"></div>
+          <div class="vis-emoji">💪</div>
+          <div class="feature-badge-float">
+            <p>Care for energy, hormones &amp; performance</p>
+            <div class="fbf-title">Built for men who expect more</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="section-label">Men's Health: TRT &amp; Performance</span>
+        <h2>Healthcare built for <em>men</em> who expect more</h2>
+        <p class="section-sub">Doctor-guided care for hormones, energy, and performance, with treatment plans tailored to your goals and adjusted as your body responds.</p>
+        <ul class="feature-checklist">
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Testosterone replacement therapy (TRT) to provincially licensed</li>
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Physical performance &amp; muscle recovery support</li>
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Hormone optimization &amp; restored energy levels</li>
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Mental focus and cognitive clarity</li>
+          <li><div class="check-icon"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Fast, discreet shipping from Canadian pharmacies</li>
+        </ul>
+        <div class="feature-tags">
+          <span class="feature-tag">Testosterone</span><span class="feature-tag">HGH Peptides</span>
+          <span class="feature-tag">Performance</span><span class="feature-tag">Energy &amp; Focus</span><span class="feature-tag">ED Support</span>
+        </div>
+        <a href="#" class="btn-primary" style="margin-top:2rem;display:inline-block;">Get Started: Men's Health</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave into dark -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="#F4EEE2"/>
+    <path d="M0,0 C480,60 960,0 1440,40 L1440,0 Z" fill="#071810"/>
+  </svg>
+</div>
+
+<!-- PEPTIDES -->
+<section id="peptides" class="dark-section" style="padding-top:4rem;">
+  <div class="tree-rings" style="width:480px;height:480px;top:40px;right:-80px;color:rgba(255,255,255,1);animation-duration:14s;"></div>
+  <div class="tree-rings" style="width:300px;height:300px;top:110px;right:20px;color:rgba(255,255,255,1);animation-duration:10s;animation-delay:-6s;"></div>
+  <div class="container">
+    <div class="feature-section reverse fade-in">
+      <div class="feature-visual">
+        <div class="feature-visual-inner vis-peptide">
+          <div class="vis-glow" style="width:180px;height:180px;background:rgba(140,120,20,0.4);top:25%;left:25%;"></div>
+          <div class="vis-forest-ring" style="width:160px;height:160px;animation-duration:4.5s;"></div>
+          <div class="vis-forest-ring" style="width:110px;height:110px;animation-duration:4.5s;animation-delay:-2.2s;"></div>
+          <div class="vis-emoji">🔬</div>
+          <div class="feature-badge-float">
+            <p>Advanced peptide support</p>
+            <div class="fbf-title">Recovery, performance &amp; longevity</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="section-label">Peptides &amp; Longevity</span>
+        <h2>Targeted support for recovery, performance &amp; <em>longevity</em></h2>
+        <p class="section-sub">Peptide therapy is designed to support how your body recovers, performs, and repairs over time, targeted options for recovery, strength, sleep, and optimization.</p>
+        <ul class="feature-checklist">
+          <li><div class="check-icon" style="background:#5a5000;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>BPC-157 &amp; TB-500 for tissue repair &amp; recovery</li>
+          <li><div class="check-icon" style="background:#5a5000;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>CJC-1295 / Ipamorelin for growth hormone support</li>
+          <li><div class="check-icon" style="background:#5a5000;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Epithalon for anti-aging &amp; longevity</li>
+          <li><div class="check-icon" style="background:#5a5000;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Personalized protocols to physician monitored</li>
+        </ul>
+        <div class="feature-tags">
+          <span class="feature-tag">BPC-157</span><span class="feature-tag">TB-500</span>
+          <span class="feature-tag">Ipamorelin</span><span class="feature-tag">Anti-Aging</span><span class="feature-tag">Recovery</span>
+        </div>
+        <a href="#" class="btn-primary" style="margin-top:2rem;display:inline-block;background:var(--amber);">Learn More <span class="coming-soon">Coming Soon</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave up -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C360,0 720,60 1080,20 C1260,5 1380,50 1440,35 L1440,60 L0,60 Z" fill="#071810"/>
+    <path d="M0,40 C360,0 720,60 1080,20 C1260,5 1380,50 1440,35 L1440,0 L0,0 Z" fill="#E8E0D0"/>
+  </svg>
+</div>
+
+<!-- HAIR -->
+<section id="hair" style="background:var(--cream-dark);padding-top:4rem;">
+  <div class="tree-rings" style="width:440px;height:440px;top:-60px;left:-80px;color:var(--forest);animation-duration:11s;"></div>
+  <div class="tree-rings" style="width:280px;height:280px;top:20px;left:-20px;color:var(--forest);animation-duration:8s;animation-delay:-3s;"></div>
+  <div class="container">
+    <div class="feature-section fade-in">
+      <div class="feature-visual">
+        <div class="feature-visual-inner vis-hair">
+          <div class="vis-glow" style="width:170px;height:170px;background:rgba(80,20,180,0.4);top:25%;left:25%;"></div>
+          <div class="vis-forest-ring" style="width:155px;height:155px;animation-duration:5s;"></div>
+          <div class="vis-forest-ring" style="width:105px;height:105px;animation-duration:5s;animation-delay:-2.5s;"></div>
+          <div class="vis-emoji">💆</div>
+          <div class="feature-badge-float">
+            <p>Targeted hair restoration</p>
+            <div class="fbf-title">Proven care for thinning hair &amp; regrowth</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="section-label">Hair Restoration</span>
+        <h2>Proven care for thinning hair and <em>regrowth</em></h2>
+        <p class="section-sub">Revitalize your roots and restore fuller-looking hair with powerful regrowth treatments formulated to nourish the scalp and support visibly thicker, healthier strands.</p>
+        <ul class="feature-checklist">
+          <li><div class="check-icon" style="background:#4a1a7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Clinically-backed regrowth ingredients (minoxidil, finasteride)</li>
+          <li><div class="check-icon" style="background:#4a1a7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Targeted scalp and follicle support</li>
+          <li><div class="check-icon" style="background:#4a1a7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Long-term hair density approach</li>
+          <li><div class="check-icon" style="background:#4a1a7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>For men and women to personalized protocols</li>
+        </ul>
+        <div class="feature-tags">
+          <span class="feature-tag">Minoxidil</span><span class="feature-tag">Finasteride</span>
+          <span class="feature-tag">Scalp Serums</span><span class="feature-tag">Men &amp; Women</span>
+        </div>
+        <a href="#" class="btn-primary" style="margin-top:2rem;display:inline-block;background:#4a1a7a;">Learn More <span class="coming-soon">Coming Soon</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave dark -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,30 C360,60 720,0 1080,50 C1260,70 1380,10 1440,25 L1440,60 L0,60 Z" fill="#E8E0D0"/>
+    <path d="M0,30 C360,60 720,0 1080,50 C1260,70 1380,10 1440,25 L1440,0 L0,0 Z" fill="#071810"/>
+  </svg>
+</div>
+
+<!-- SKIN -->
+<section id="skin" class="dark-section" style="padding-top:4rem;">
+  <div class="tree-rings" style="width:520px;height:520px;bottom:-60px;right:-100px;color:rgba(255,255,255,1);animation-duration:12s;"></div>
+  <div class="tree-rings" style="width:340px;height:340px;bottom:20px;right:-30px;color:rgba(255,255,255,1);animation-duration:9s;animation-delay:-5s;"></div>
+  <svg class="fern-deco" style="top:-20px;left:-30px;width:260px;height:320px;" viewBox="0 0 260 320" fill="none">
+    <path d="M130,300 C130,300 130,100 130,50" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M130,220 C108,198 68,206 45,180" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <path d="M130,188 C152,166 192,174 215,148" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <path d="M130,156 C112,136 75,144 55,120" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M130,124 C148,104 185,112 205,88" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M130,94 C116,75 86,83 68,62" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+  <div class="container">
+    <div class="feature-section reverse fade-in">
+      <div class="feature-visual">
+        <div class="feature-visual-inner vis-skin">
+          <div class="vis-glow" style="width:180px;height:180px;background:rgba(160,50,20,0.4);top:25%;left:25%;"></div>
+          <div class="vis-forest-ring" style="width:160px;height:160px;animation-duration:5.5s;"></div>
+          <div class="vis-forest-ring" style="width:108px;height:108px;animation-duration:5.5s;animation-delay:-2.7s;"></div>
+          <div class="vis-emoji">✨</div>
+          <div class="feature-badge-float">
+            <p>Personalized care for healthier skin</p>
+            <div class="fbf-title">Skincare that goes deeper than the surface</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="section-label">Skincare: Prescription Strength</span>
+        <h2>Skincare that treats the <em>root cause</em></h2>
+        <p class="section-sub">From acne and aging to sensitivity and texture, every plan is built for real, visible improvement. Proven ingredients. Targeted treatments. Care that evolves with your skin.</p>
+        <ul class="feature-checklist">
+          <li><div class="check-icon" style="background:#7a3a1a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Clinician-guided, tailored care plans</li>
+          <li><div class="check-icon" style="background:#7a3a1a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Prescription-strength tretinoin, clindamycin &amp; more</li>
+          <li><div class="check-icon" style="background:#7a3a1a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Simple daily routines to designed for real life</li>
+          <li><div class="check-icon" style="background:#7a3a1a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Visible skin results in weeks, not months</li>
+        </ul>
+        <div class="feature-tags">
+          <span class="feature-tag">Tretinoin</span><span class="feature-tag">Acne Treatment</span>
+          <span class="feature-tag">Anti-Aging</span><span class="feature-tag">Rosacea</span><span class="feature-tag">Hyperpigmentation</span>
+        </div>
+        <a href="#" class="btn-primary" style="margin-top:2rem;display:inline-block;background:#7a3a1a;">Learn More <span class="coming-soon">Coming Soon</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave into dark-section how it works -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C480,60 960,0 1440,35 L1440,60 L0,60 Z" fill="#071810"/>
+    <path d="M0,20 C480,60 960,0 1440,35 L1440,0 L0,0 Z" fill="#0C2A1A"/>
+  </svg>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="how-section" style="padding-top: 4rem;">
+  <!-- Decorative pine branches overhead -->
+  <svg style="position:absolute;top:0;left:0;right:0;width:100%;pointer-events:none;opacity:0.07;" viewBox="0 0 1440 160" preserveAspectRatio="none" fill="none">
+    <!-- Left branch -->
+    <path d="M0,0 C80,60 120,100 140,160" stroke="#4DAA72" stroke-width="4" stroke-linecap="round"/>
+    <path d="M30,40 C50,38 80,30 95,20" stroke="#4DAA72" stroke-width="2" stroke-linecap="round"/>
+    <path d="M55,75 C75,72 105,63 122,52" stroke="#4DAA72" stroke-width="2" stroke-linecap="round"/>
+    <path d="M80,110 C100,106 130,96 148,84" stroke="#4DAA72" stroke-width="2" stroke-linecap="round"/>
+    <path d="M100,140 C118,136 148,125 165,112" stroke="#4DAA72" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Right branch -->
+    <path d="M1440,0 C1360,60 1320,100 1300,160" stroke="#4DAA72" stroke-width="4" stroke-linecap="round"/>
+    <path d="M1410,40 C1390,38 1360,30 1345,20" stroke="#4DAA72" stroke-width="2" stroke-linecap="round"/>
+    <path d="M1385,75 C1365,72 1335,63 1318,52" stroke="#4DAA72" stroke-width="2" stroke-linecap="round"/>
+    <path d="M1360,110 C1340,106 1310,96 1292,84" stroke="#4DAA72" stroke-width="2" stroke-linecap="round"/>
+    <path d="M1340,140 C1322,136 1292,125 1275,112" stroke="#4DAA72" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <div class="container">
+    <div style="text-align:center; max-width:600px; margin:0 auto 0;">
+      <span class="section-label" style="color:var(--amber-light);">Simple Process</span>
+      <h2 style="color:var(--white);">Modern healthcare, built <em style="color:var(--amber-light)">around you</em></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.45);margin:0 auto;">Get started in minutes. No referrals, no waiting rooms. Just care that fits your life.</p>
+    </div>
+    <div class="steps-grid" style="margin-top:3.5rem;">
+      <div class="steps-connector"></div>
+      <div class="step-card fade-in">
+        <div class="step-num">1</div>
+        <h3>Take the assessment</h3>
+        <p>Answer a few questions about your health history and goals. It takes under 5 minutes and is fully confidential.</p>
+      </div>
+      <div class="step-card fade-in fd1">
+        <div class="step-num">2</div>
+        <h3>Meet your physician</h3>
+        <p>Connect with a licensed Canadian physician via video or secure message. They review your history and create a personalized plan.</p>
+      </div>
+      <div class="step-card fade-in fd2">
+        <div class="step-num">3</div>
+        <h3>Receive your prescription</h3>
+        <p>Your prescription is sent to a licensed Canadian pharmacy. Medication ships fast and discreetly, right to your door.</p>
+      </div>
+      <div class="step-card fade-in fd3">
+        <div class="step-num">4</div>
+        <h3>Ongoing support &amp; results</h3>
+        <p>Check in with your care team, track progress in your patient portal, and adjust your plan as you reach your goals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave to testimonials -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 C360,60 720,10 1080,50 C1260,70 1380,20 1440,30 L1440,60 L0,60 Z" fill="#0C2A1A"/>
+    <path d="M0,0 C360,60 720,10 1080,50 C1260,70 1380,20 1440,30 L1440,0 Z" fill="#E8E0D0"/>
+  </svg>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" style="padding-top:4rem;">
+  <div class="tree-rings" style="width:600px;height:600px;top:-80px;right:-150px;color:var(--forest);animation-duration:15s;opacity:0.04;"></div>
+  <div class="container">
+    <div class="testimonials-header">
+      <div>
+        <span class="section-label">Patient Stories</span>
+        <h2>There's a reason Canadians<br>are raving about us</h2>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:600;color:var(--forest-dark);line-height:1;">4.9</div>
+        <div style="display:flex;gap:4px;justify-content:flex-end;margin:0.25rem 0;color:var(--amber);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p style="font-size:0.78rem;color:#7A8E80;">Based on 2,400+ verified reviews</p>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The physician was incredibly thorough and actually listened. I've struggled with my weight for years and finally feel like I have real medical support. Down 22 lbs in 3 months."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:var(--forest-mid);">SM</div>
+          <div class="review-author-info"><strong>Sarah M.</strong><span>Vancouver, BC | Weight Loss</span></div>
+        </div>
+      </div>
+      <div class="review-card fade-in fd1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"My testosterone was low and I had no idea. Within 6 weeks of starting TRT through NorthMed I have more energy than I've had in a decade. The process was seamless."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#1a4080;">JL</div>
+          <div class="review-author-info"><strong>James L.</strong><span>Calgary, AB | Men's Health</span></div>
+        </div>
+      </div>
+      <div class="review-card fade-in fd2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"I was skeptical about telehealth but NorthMed changed my mind. The questions were thorough, the response was fast, and my prescription arrived in 2 days. Amazing service."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:var(--amber);">RT</div>
+          <div class="review-author-info"><strong>Rachel T.</strong><span>Toronto, ON | Skincare</span></div>
+        </div>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Living in rural Nova Scotia meant I had almost no access to specialist care. NorthMed gave me the same quality of treatment I would have had to travel hours for. Life-changing."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#7a3a1a;">MP</div>
+          <div class="review-author-info"><strong>Marie P.</strong><span>Antigonish, NS | Women's Health</span></div>
+        </div>
+      </div>
+      <div class="review-card fade-in fd1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Losing weight without a crazy diet. It just felt like magic. I was a snacker but not anymore. I feel so much better, and the 24/7 support made all the difference."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#5a2d7a;">DK</div>
+          <div class="review-author-info"><strong>David K.</strong><span>Winnipeg, MB | Weight Loss</span></div>
+        </div>
+      </div>
+      <div class="review-card fade-in fd2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The staff have been so friendly and caring. I didn't expect that from an online service. If I have a question, I get an answer from a real person quickly. Absolutely recommend."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:var(--forest);">LW</div>
+          <div class="review-author-info"><strong>Linda W.</strong><span>Ottawa, ON | Women's Health</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-bar-item">
+      <div class="trust-bar-icon">🛡️</div>
+      <div class="trust-bar-text"><strong>NorthMed Guarantee</strong><span>Satisfaction or we'll make it right</span></div>
+    </div>
+    <div class="trust-bar-item">
+      <div class="trust-bar-icon">🚀</div>
+      <div class="trust-bar-text"><strong>Free Expedited Delivery</strong><span>Discreet packaging across Canada</span></div>
+    </div>
+    <div class="trust-bar-item">
+      <div class="trust-bar-icon">🩺</div>
+      <div class="trust-bar-text"><strong>Doctor-Led Plans</strong><span>Licensed in your province</span></div>
+    </div>
+    <div class="trust-bar-item">
+      <div class="trust-bar-icon">💳</div>
+      <div class="trust-bar-text"><strong>No Hidden Fees</strong><span>Clear pricing, always in CAD</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--cream);padding-top:5rem;padding-bottom:5rem;">
+  <div class="tree-rings" style="width:500px;height:500px;top:-60px;right:-100px;color:var(--forest);animation-duration:13s;"></div>
+  <div class="tree-rings" style="width:320px;height:320px;top:20px;right:-30px;color:var(--forest);animation-duration:9s;animation-delay:-4s;"></div>
+  <svg class="fern-deco" style="bottom:-10px;left:-30px;width:220px;height:260px;transform:scaleX(-1);" viewBox="0 0 220 260" fill="none">
+    <path d="M110,240 C110,240 110,70 110,30" stroke="#174D2E" stroke-width="3" stroke-linecap="round"/>
+    <path d="M110,180 C90,160 55,168 35,142" stroke="#174D2E" stroke-width="2" stroke-linecap="round"/>
+    <path d="M110,150 C130,130 165,138 185,112" stroke="#174D2E" stroke-width="2" stroke-linecap="round"/>
+    <path d="M110,120 C94,102 62,110 45,86" stroke="#174D2E" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M110,92 C126,74 158,82 175,58" stroke="#174D2E" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M110,65 C98,49 74,57 60,38" stroke="#174D2E" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:5rem;align-items:start;">
+      <div class="fade-in">
+        <span class="section-label">Got Questions?</span>
+        <h2>Frequently asked <em>questions</em></h2>
+        <p class="section-sub">Everything you need to know about getting care through NorthMed. Can not find your answer? Our team is here to help.</p>
+        <a href="mailto:hello@northmed.ca" class="btn-primary" style="margin-top:2rem;display:inline-block;">Contact Support</a>
+      </div>
+      <div class="faq-list fade-in fd1" id="faqList"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+.faq-item {
+  border-bottom: 1px solid rgba(23,77,46,0.12);
+  overflow: hidden;
+}
+.faq-item:first-child { border-top: 1px solid rgba(23,77,46,0.12); }
+.faq-question {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; padding: 1.4rem 0;
+  font-family: var(--font-body); font-size: 1rem; font-weight: 500;
+  color: var(--forest-dark); text-align: left; line-height: 1.45;
+  transition: color 0.25s;
+}
+.faq-question:hover { color: var(--forest-mid); }
+.faq-question.open { color: var(--forest-mid); }
+.faq-icon {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid rgba(23,77,46,0.25);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.25s, border-color 0.25s, transform 0.35s;
+}
+.faq-question.open .faq-icon {
+  background: var(--forest-mid); border-color: var(--forest-mid); transform: rotate(45deg);
+}
+.faq-icon svg { width: 12px; height: 12px; stroke: var(--forest); transition: stroke 0.25s; }
+.faq-question.open .faq-icon svg { stroke: white; }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
+  padding: 0;
+}
+.faq-answer.open {
+  max-height: 300px;
+  padding-bottom: 1.25rem;
+}
+.faq-answer p {
+  font-size: 0.92rem; color: #4A5E4F; line-height: 1.78; font-weight: 300;
+}
+</style>
+
+<script>
+(function buildFAQ() {
+  const faqs = [
+    {
+      q: "Is NorthMed available in my province?",
+      a: "Yes. NorthMed works with licensed physicians registered in all ten provinces. Whether you are in British Columbia, Ontario, Quebec, or anywhere in between, we can connect you with a provider who is legally authorized to treat patients in your province."
+    },
+    {
+      q: "How does an online doctor visit work?",
+      a: "After completing a short health assessment, you will be connected with a licensed Canadian physician via secure video or messaging. Your physician reviews your history, discusses your goals, and issues a prescription if appropriate. The whole process typically takes less than 24 hours."
+    },
+    {
+      q: "Is my health information kept private?",
+      a: "Absolutely. NorthMed is fully compliant with PIPEDA, Canada's federal privacy law. Your medical information is encrypted, never sold, and shared only with your treating physician and the pharmacy fulfilling your prescription."
+    },
+    {
+      q: "How are my medications shipped?",
+      a: "Prescriptions are filled by Health Canada registered Canadian compounding pharmacies and shipped directly to your door in discreet, unmarked packaging. Most patients receive their medication within 3 to 5 business days, with expedited options available."
+    },
+    {
+      q: "Are GLP-1 medications covered by insurance in Canada?",
+      a: "Coverage varies by province and private plan. Some provincial formularies cover semaglutide or tirzepatide for patients with Type 2 diabetes, and certain private insurers cover them for obesity. Our care team can help you understand your coverage options during your consultation."
+    },
+    {
+      q: "What is the difference between a branded and compounded GLP-1?",
+      a: "Branded medications like Ozempic and Wegovy are manufactured by pharmaceutical companies and approved by Health Canada. Compounded versions are prepared by licensed Canadian pharmacies and may be more affordable. Your physician will discuss which option is most appropriate for your health profile and budget."
+    },
+    {
+      q: "Can I cancel or pause my plan?",
+      a: "Yes, anytime. There are no long-term contracts. You can pause or cancel your plan through your patient portal or by contacting our support team. Unused medication that has already shipped is subject to our refund policy."
+    },
+    {
+      q: "What ongoing support do I receive?",
+      a: "All plans include 24/7 messaging support with our care team, regular check-ins with your physician, and access to your patient portal where you can track progress and manage your care. Weight loss plans also include free registered dietitian visits."
+    }
+  ];
+
+  const list = document.getElementById('faqList');
+  faqs.forEach((faq, i) => {
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML = `
+      <button class="faq-question" aria-expanded="false">
+        <span>${faq.q}</span>
+        <div class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round">
+            <line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/>
+          </svg>
+        </div>
+      </button>
+      <div class="faq-answer"><p>${faq.a}</p></div>
+    `;
+    const btn = item.querySelector('.faq-question');
+    const ans = item.querySelector('.faq-answer');
+    btn.addEventListener('click', () => {
+      const isOpen = btn.classList.contains('open');
+      document.querySelectorAll('.faq-question.open').forEach(b => {
+        b.classList.remove('open');
+        b.nextElementSibling.classList.remove('open');
+        b.setAttribute('aria-expanded','false');
+      });
+      if (!isOpen) {
+        btn.classList.add('open');
+        ans.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+    list.appendChild(item);
+  });
+})();
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <!-- Decorative pine trees in footer -->
+  <svg class="footer-fern" viewBox="0 0 320 400" fill="none" width="320" height="400">
+    <path d="M160,380 L160,200" stroke="#4DAA72" stroke-width="4" stroke-linecap="round"/>
+    <path d="M160,200 L100,280 L130,280 L80,340 L115,340 L55,390" stroke="#4DAA72" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M160,200 L220,280 L190,280 L240,340 L205,340 L265,390" stroke="#4DAA72" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M160,240 L110,300 L140,300 L95,350" stroke="#4DAA72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M160,240 L210,300 L180,300 L225,350" stroke="#4DAA72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">
+        <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+          <path d="M14 2 L14 6 M14 6 C14 6 8 9 6 14 C4 19 7 23 14 25 C21 23 24 19 22 14 C20 9 14 6 14 6Z" stroke="rgba(232,181,90,0.7)" stroke-width="1.5" fill="none"/>
+          <path d="M14 10 L14 25" stroke="rgba(232,181,90,0.4)" stroke-width="1"/>
+          <path d="M10 14 L18 14 M9 18 L19 18 M11 22 L17 22" stroke="rgba(232,181,90,0.3)" stroke-width="0.8"/>
+        </svg>
+        North<span>Med</span>
+      </div>
+      <p class="footer-desc">Personalized telehealth care for Canadians. Licensed physicians, Health Canada regulated, and shipped coast to coast.</p>
+      <div class="footer-contact-item">📧 <a href="mailto:hello@northmed.ca">hello@northmed.ca</a></div>
+      <div class="footer-contact-item">📞 <a href="tel:+18005551234">1-800-555-1234</a></div>
+      <div class="footer-contact-item">📍 123 Bay Street, Suite 400, Toronto, ON M5H 2R4</div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="weight-loss.html">Weight Loss</a></li>
+        <li><a href="mens-health.html">Men's Health</a></li>
+        <li><a href="womens-health.html">Women's Health</a></li>
+        <li><a href="peptides.html">Peptides &amp; Longevity</a></li>
+        <li><a href="hair-restoration.html">Hair Restoration</a></li>
+        <li><a href="#skin">Skincare</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Physicians</a></li>
+        <li><a href="#">Partner Pharmacies</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Patient Portal</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Refund Policy</a></li>
+        <li><a href="#">Accessibility</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 NorthMed Health Inc. All rights reserved. Serving Canadians nationwide.</p>
+    <div class="footer-legal">
+      <a href="#">Terms &amp; Conditions</a>
+      <a href="#">Privacy Policy (PIPEDA)</a>
+      <a href="#">Medical Consent</a>
+      <a href="#">Refund Policy</a>
+    </div>
+  </div>
+  <div class="footer-disclaimer">
+    The assessment made available on the NorthMed website does not create a doctor-patient relationship between the individual completing the assessment and NorthMed. All physicians are licensed in the province in which the patient resides and adhere to provincial College of Physicians and Surgeons standards. Prescriptions are issued only after an online consultation with an independent licensed Canadian provider. All medications are dispensed by Health Canada–registered Canadian pharmacies. Results may vary and are affected by an individual's adherence to the program and their clinician's recommendations. Consult a healthcare professional before starting any medical program. *Free dietitian visits subject to provincial insurance coverage and eligibility, to be determined at time of visit.
+  </div>
+</footer>
+
+<script>
+/* ─── NAV SCROLL ─── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ─── STAR FIELD ─── */
+const starsEl = document.getElementById('heroStars');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2 + 0.5;
+  s.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%; top:${Math.random()*70}%;
+    animation-duration:${2+Math.random()*4}s;
+    animation-delay:${-Math.random()*5}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+/* ─── PINE TREE FOREST SILHOUETTE ─── */
+(function buildForest() {
+  const W = 1440, H = 220;
+  const rng = (min, max) => min + Math.random() * (max - min);
+
+  function conifer(cx, base, h, w) {
+    const layers = 4;
+    let d = '';
+    for (let i = 0; i < layers; i++) {
+      const t = i / (layers - 1);
+      const ly = base - h * (0.25 + t * 0.75);
+      const lw = w * (0.85 - t * 0.55);
+      const bot = base - h * (0.1 + t * 0.45);
+      d += `M${cx-lw},${bot} Q${cx-lw*0.3},${ly-lw*0.2} ${cx},${ly} Q${cx+lw*0.3},${ly-lw*0.2} ${cx+lw},${bot} `;
+    }
+    return d;
+  }
+
+  function buildLayer(count, hMin, hMax, wMult, fill, opacity) {
+    let path = '';
+    const step = W / count;
+    for (let i = 0; i < count; i++) {
+      const cx = i * step + step * 0.5 + rng(-step*0.25, step*0.25);
+      const h  = rng(hMin, hMax);
+      const w  = h * wMult;
+      path += conifer(cx, H, h, w);
+    }
+    return `<path d="${path}" fill="${fill}" opacity="${opacity}"/>`;
+  }
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" width="100%" height="${H}">
+    ${buildLayer(18, 60, 100, 0.28, '#071810', 0.9)}
+    ${buildLayer(14, 80, 130, 0.3,  '#0a2018', 0.85)}
+    ${buildLayer(10, 100, 155, 0.32,'#0c2a1a', 0.9)}
+    ${buildLayer(8,  120, 175, 0.34, '#0e3420', 0.95)}
+  </svg>`;
+
+  document.getElementById('forestScape').innerHTML = svg;
+})();
+
+/* ─── FLOATING LEAVES ─── */
+(function spawnLeaves() {
+  const canvas = document.getElementById('leavesCanvas');
+  const leafSVGs = [
+    `<svg viewBox="0 0 20 24" fill="none"><path d="M10,2 C10,2 2,8 2,14 C2,19 5.5,22 10,22 C14.5,22 18,19 18,14 C18,8 10,2 10,2Z" fill="currentColor"/><line x1="10" y1="22" x2="10" y2="24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    `<svg viewBox="0 0 22 18" fill="none"><path d="M11,2 C11,2 3,6 2,11 C1,16 5,18 11,17 C17,18 21,16 20,11 C19,6 11,2 11,2Z" fill="currentColor"/><line x1="11" y1="17" x2="9" y2="20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+    `<svg viewBox="0 0 16 22" fill="none"><path d="M8,1 C8,1 2,7 2,13 C2,18 4.5,21 8,21 C11.5,21 14,18 14,13 C14,7 8,1 8,1Z M8,21 L8,23" stroke="currentColor" stroke-width="1.2" fill="currentColor" fill-opacity="0.8"/></svg>`,
+  ];
+  const colors = ['#2E8A54','#4DAA72','#174D2E','#1E6B3E','#6aad82','#C2882A'];
+
+  for (let i = 0; i < 18; i++) {
+    const wrap = document.createElement('div');
+    wrap.className = 'leaf';
+    const size   = 10 + Math.random() * 14;
+    const left   = Math.random() * 100;
+    const dur    = 12 + Math.random() * 20;
+    const delay  = -Math.random() * 25;
+    const drift  = (Math.random() - 0.5) * 200 + 'px';
+    const spin   = (Math.random() - 0.5) * 720 + 'deg';
+    const color  = colors[Math.floor(Math.random() * colors.length)];
+    const svg    = leafSVGs[Math.floor(Math.random() * leafSVGs.length)];
+    wrap.style.cssText = `
+      left:${left}%; width:${size}px; height:${size}px;
+      color:${color};
+      --drift:${drift}; --spin:${spin};
+      animation-duration:${dur}s;
+      animation-delay:${delay}s;
+    `;
+    wrap.innerHTML = svg;
+    canvas.appendChild(wrap);
+  }
+})();
+
+/* ─── FADE IN ON SCROLL ─── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+/* ─── PILL INTERACTION ─── */
+document.querySelectorAll('.pill').forEach(p => {
+  p.addEventListener('click', () => {
+    document.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+    p.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

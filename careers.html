@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers at NorthMed: Join Our Team | NorthMed</title>
+<meta name="description" content="Join NorthMed and help build the future of Canadian telehealth. Open roles for physicians, engineers, nurses, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest-deep:#071810;--forest-dark:#0C2A1A;--forest:#174D2E;--forest-mid:#1E6B3E;--fern:#2E8A54;--moss:#4DAA72;--mist:#E6F0EA;--cream:#F4EEE2;--cream-dark:#E8E0D0;--amber:#C2882A;--amber-light:#E8B55A;--white:#FFFFFF;--font-display:'Cormorant Garamond',Georgia,serif;--font-body:'Plus Jakarta Sans',sans-serif;--radius:12px;--radius-lg:20px;--ease:cubic-bezier(0.4,0,0.2,1);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--cream);color:var(--forest-dark);overflow-x:hidden;line-height:1.6;}
+.leaves-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+.leaf{position:absolute;top:-60px;opacity:0;animation:leafFall linear infinite;}
+@keyframes leafFall{0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0;}5%{opacity:0.5;}95%{opacity:0.3;}100%{transform:translateY(110vh) translateX(var(--drift)) rotate(var(--spin));opacity:0;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;transition:background 0.4s,box-shadow 0.4s;}
+nav.scrolled{background:rgba(7,24,16,0.94);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(255,255,255,0.06);}
+.nav-logo{font-family:var(--font-display);font-size:1.8rem;font-weight:600;color:var(--white);letter-spacing:-0.02em;text-decoration:none;display:flex;align-items:center;gap:0.5rem;}
+.nav-logo span{color:var(--amber-light);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.875rem;font-weight:500;letter-spacing:0.03em;transition:color 0.25s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-cta{background:var(--amber);color:var(--white);border:none;padding:0.6rem 1.4rem;border-radius:100px;font-family:var(--font-body);font-size:0.875rem;font-weight:600;cursor:pointer;transition:background 0.25s,transform 0.25s;letter-spacing:0.02em;}
+.nav-cta:hover{background:var(--amber-light);transform:scale(1.04);}
+section{padding:5rem 4rem;position:relative;overflow:hidden;}
+.container{max-width:1200px;margin:0 auto;}
+.section-label{font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--fern);margin-bottom:0.75rem;display:block;}
+h1{font-family:var(--font-display);font-size:clamp(2.8rem,5vw,5rem);font-weight:600;line-height:1.06;color:var(--white);letter-spacing:-0.025em;margin-bottom:1.25rem;}
+h1 em{font-style:italic;color:var(--amber-light);}
+h2{font-family:var(--font-display);font-size:clamp(2rem,3vw,3rem);font-weight:600;line-height:1.1;color:var(--forest-dark);letter-spacing:-0.02em;margin-bottom:1.25rem;}
+h2 em{font-style:italic;color:var(--forest-mid);}
+h3{font-family:var(--font-display);font-size:1.3rem;font-weight:500;color:var(--forest-dark);margin-bottom:0.6rem;letter-spacing:-0.01em;}
+p.lead{font-size:1.05rem;color:#4A5E4F;line-height:1.78;max-width:560px;font-weight:300;}
+.btn-primary{background:var(--amber);color:var(--white);padding:0.875rem 2rem;border-radius:100px;font-family:var(--font-body);font-size:0.95rem;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:background 0.25s,transform 0.25s;display:inline-block;}
+.btn-primary:hover{background:var(--amber-light);transform:translateY(-2px);}
+.btn-outline-dark{background:transparent;color:var(--forest-dark);padding:0.875rem 2rem;border-radius:100px;font-family:var(--font-body);font-size:0.95rem;font-weight:500;text-decoration:none;border:1.5px solid rgba(23,77,46,0.3);cursor:pointer;transition:border-color 0.25s,background 0.25s;display:inline-block;}
+.btn-outline-dark:hover{border-color:var(--forest-mid);background:var(--mist);}
+.btn-outline-light{background:transparent;color:var(--white);padding:0.875rem 2rem;border-radius:100px;font-family:var(--font-body);font-size:0.95rem;font-weight:500;text-decoration:none;border:1px solid rgba(255,255,255,0.28);cursor:pointer;transition:border-color 0.25s,background 0.25s;display:inline-block;}
+.btn-outline-light:hover{border-color:rgba(255,255,255,0.65);background:rgba(255,255,255,0.06);}
+.dark-hero{background:var(--forest-deep);min-height:60vh;padding:10rem 4rem 6rem;position:relative;overflow:hidden;}
+.dark-hero .aurora{position:absolute;inset:0;pointer-events:none;}
+.aurora-band{position:absolute;left:-20%;right:-20%;border-radius:50%;filter:blur(60px);mix-blend-mode:screen;animation:auroraDrift ease-in-out infinite alternate;opacity:0.16;}
+.aurora-band-1{top:5%;height:40%;background:radial-gradient(ellipse,#00c97a 0%,#00a86b 40%,transparent 70%);animation-duration:14s;}
+.aurora-band-2{top:15%;height:50%;background:radial-gradient(ellipse,#00e5a0 0%,#1adba2 30%,transparent 65%);animation-duration:18s;animation-delay:-5s;opacity:0.1;}
+@keyframes auroraDrift{0%{transform:translateX(-8%) scaleY(1);opacity:0.12;}50%{transform:translateX(5%) scaleY(1.1);opacity:0.22;}100%{transform:translateX(8%) scaleY(1.05);opacity:0.18;}}
+.hero-stars{position:absolute;inset:0;z-index:0;}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:0.15;}50%{opacity:0.75;}}
+.hero-content-inner{position:relative;z-index:2;max-width:700px;}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(200,136,42,0.15);border:1px solid rgba(200,136,42,0.35);color:var(--amber-light);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:100px;margin-bottom:1.5rem;width:fit-content;}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);}
+.hero-sub{color:rgba(255,255,255,0.6);font-size:1.05rem;line-height:1.78;max-width:540px;margin-bottom:2.5rem;font-weight:300;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.tree-rings{position:absolute;border-radius:50%;border:1px solid currentColor;pointer-events:none;animation:ringBreath ease-in-out 10s infinite alternate;}
+@keyframes ringBreath{from{opacity:0.04;}to{opacity:0.09;}}
+.fern-deco{position:absolute;pointer-events:none;opacity:0.07;}
+.wave-top{display:block;width:100%;line-height:0;margin-bottom:-2px;}
+.wave-top svg{display:block;width:100%;}
+.card-grid{display:grid;gap:1.5rem;}
+.card-grid-3{grid-template-columns:repeat(3,1fr);}
+.card-grid-2{grid-template-columns:repeat(2,1fr);}
+.card-grid-4{grid-template-columns:repeat(4,1fr);}
+.card{background:var(--white);border-radius:var(--radius-lg);padding:1.75rem;border:1px solid rgba(23,77,46,0.08);transition:transform 0.3s,box-shadow 0.3s;}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(7,24,16,0.08);}
+.card-icon{font-size:1.75rem;margin-bottom:1rem;display:block;}
+.card h3{margin-bottom:0.5rem;}
+.card p{font-size:0.9rem;color:#4A5E4F;line-height:1.7;font-weight:300;}
+.dark-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:1.75rem;transition:border-color 0.3s,transform 0.3s;}
+.dark-card:hover{border-color:rgba(255,255,255,0.18);transform:translateY(-4px);}
+.dark-card .card-icon{display:block;font-size:1.75rem;margin-bottom:1rem;}
+.dark-card h3{color:var(--white);margin-bottom:0.5rem;}
+.dark-card p{font-size:0.88rem;color:rgba(255,255,255,0.5);line-height:1.7;font-weight:300;}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:0.7rem;margin:1.5rem 0;}
+.check-list li{display:flex;align-items:flex-start;gap:0.75rem;font-size:0.94rem;color:#3d5245;line-height:1.55;}
+.check-list.light li{color:rgba(255,255,255,0.65);}
+.check-dot{width:20px;height:20px;border-radius:50%;background:var(--forest-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.check-dot svg{width:10px;height:10px;}
+.tag{padding:0.38rem 0.9rem;border-radius:100px;background:var(--mist);color:var(--forest);font-size:0.78rem;font-weight:500;border:1px solid rgba(23,77,46,0.18);display:inline-block;}
+.tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.step-num-inline{width:44px;height:44px;border-radius:12px;background:var(--forest-mid);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--white);flex-shrink:0;}
+.faq-item{border-bottom:1px solid rgba(23,77,46,0.12);}
+.faq-item:first-child{border-top:1px solid rgba(23,77,46,0.12);}
+.faq-question{width:100%;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.3rem 0;font-family:var(--font-body);font-size:0.98rem;font-weight:500;color:var(--forest-dark);text-align:left;line-height:1.45;transition:color 0.25s;}
+.faq-question:hover,.faq-question.open{color:var(--forest-mid);}
+.faq-icon{width:26px;height:26px;border-radius:50%;flex-shrink:0;border:1.5px solid rgba(23,77,46,0.25);display:flex;align-items:center;justify-content:center;transition:background 0.25s,border-color 0.25s,transform 0.35s;}
+.faq-question.open .faq-icon{background:var(--forest-mid);border-color:var(--forest-mid);transform:rotate(45deg);}
+.faq-icon svg{width:11px;height:11px;stroke:var(--forest);transition:stroke 0.25s;}
+.faq-question.open .faq-icon svg{stroke:white;}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s var(--ease),padding 0.3s;padding:0;}
+.faq-answer.open{max-height:300px;padding-bottom:1.2rem;}
+.faq-answer p{font-size:0.9rem;color:#4A5E4F;line-height:1.78;font-weight:300;}
+.cta-banner{background:var(--forest-dark);padding:5rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.cta-banner h2{color:var(--white);}
+.cta-banner h2 em{color:var(--amber-light);}
+.cta-banner p{color:rgba(255,255,255,0.55);max-width:500px;margin:0 auto 2rem;font-size:1rem;font-weight:300;line-height:1.75;}
+.cta-banner .actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.pricing-card{background:var(--white);border-radius:var(--radius-lg);padding:2rem;border:1.5px solid rgba(23,77,46,0.1);transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(7,24,16,0.08);}
+.pricing-card.featured{border-color:var(--forest-mid);background:var(--mist);}
+.pricing-badge{display:inline-block;background:var(--forest-mid);color:white;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:100px;margin-bottom:1rem;}
+.pricing-price{font-family:var(--font-display);font-size:2.5rem;font-weight:600;color:var(--forest-dark);line-height:1;margin:1rem 0 0.25rem;}
+.pricing-price span{font-size:1rem;font-weight:400;color:#6A7D70;}
+.pricing-desc{font-size:0.85rem;color:#6A7D70;margin-bottom:1.5rem;font-weight:300;}
+.pricing-divider{border:none;border-top:1px solid rgba(23,77,46,0.1);margin:1.5rem 0;}
+.testimonial-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.testimonial-card{background:var(--white);border-radius:var(--radius-lg);padding:1.75rem;border:1px solid rgba(23,77,46,0.07);position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+.testimonial-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(7,24,16,0.07);}
+.testimonial-card::before{content:'"';position:absolute;top:-0.5rem;right:1.25rem;font-family:var(--font-display);font-size:6rem;font-weight:700;color:var(--mist);line-height:1;pointer-events:none;}
+.testimonial-stars{color:var(--amber);margin-bottom:0.75rem;font-size:0.85rem;}
+.testimonial-text{font-size:0.9rem;color:#4A5E4F;line-height:1.78;margin-bottom:1.25rem;font-weight:300;position:relative;z-index:1;}
+.testimonial-author{display:flex;align-items:center;gap:0.75rem;}
+.t-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:600;color:white;flex-shrink:0;}
+.t-name{font-size:0.875rem;font-weight:600;color:var(--forest-dark);display:block;}
+.t-loc{font-size:0.78rem;color:#7A8E80;}
+.bg-mist{background:var(--mist);}
+.bg-cream-dark{background:var(--cream-dark);}
+.bg-dark{background:var(--forest-dark);}
+.bg-dark h2{color:var(--white);}
+.bg-dark h2 em{color:var(--amber-light);}
+.bg-dark .section-label{color:var(--amber-light);}
+.bg-dark p.lead{color:rgba(255,255,255,0.55);}
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+.fd1{transition-delay:0.1s;}.fd2{transition-delay:0.2s;}.fd3{transition-delay:0.3s;}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:rgba(255,255,255,0.45);margin-bottom:1.5rem;}
+.breadcrumb a{color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s;}
+.breadcrumb a:hover{color:rgba(255,255,255,0.8);}
+.breadcrumb span{color:rgba(255,255,255,0.25);}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.related-card{background:var(--white);border-radius:var(--radius-lg);padding:1.5rem;border:1px solid rgba(23,77,46,0.08);text-decoration:none;display:block;transition:transform 0.25s,box-shadow 0.25s;}
+.related-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(7,24,16,0.08);}
+.related-card .emoji{font-size:1.75rem;display:block;margin-bottom:0.75rem;}
+.related-card h4{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--forest-dark);margin-bottom:0.35rem;}
+.related-card p{font-size:0.82rem;color:#6A7D70;line-height:1.6;}
+.legal-layout{display:grid;grid-template-columns:220px 1fr;gap:4rem;align-items:start;}
+.legal-sidebar{position:sticky;top:7rem;}
+.legal-sidebar h4{font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem;}
+.legal-sidebar ul{list-style:none;}
+.legal-sidebar ul li{margin-bottom:0.5rem;}
+.legal-sidebar ul li a{font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s;}
+.legal-sidebar ul li a:hover{color:rgba(255,255,255,0.8);}
+.legal-body h3{font-family:var(--font-display);font-size:1.35rem;font-weight:500;color:var(--forest-dark);margin:2rem 0 0.75rem;}
+.legal-body h3:first-child{margin-top:0;}
+.legal-body p{font-size:0.92rem;color:#4A5E4F;line-height:1.8;margin-bottom:1rem;font-weight:300;}
+.legal-body ul{padding-left:1.5rem;margin-bottom:1rem;}
+.legal-body ul li{font-size:0.92rem;color:#4A5E4F;line-height:1.75;margin-bottom:0.4rem;font-weight:300;}
+.legal-date{font-size:0.82rem;color:#7A8E80;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(23,77,46,0.12);}
+@media(max-width:1024px){nav{padding:1rem 1.5rem;}.nav-links{display:none;}section{padding:3.5rem 1.5rem;}.dark-hero{padding:8rem 1.5rem 4rem;}.two-col{grid-template-columns:1fr;gap:2.5rem;}.card-grid-3,.card-grid-4,.pricing-grid,.testimonial-row,.related-grid{grid-template-columns:1fr;}.card-grid-2{grid-template-columns:1fr;}.legal-layout{grid-template-columns:1fr;}.legal-sidebar{display:none;}.cta-banner{padding:3.5rem 1.5rem;}}
+</style>
+</head>
+<body>
+<div class="leaves-canvas" id="leavesCanvas"></div>
+<nav id="navbar">
+  <a href="northmed-forest.html" class="nav-logo"><svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M14 2 L14 6 M14 6 C14 6 8 9 6 14 C4 19 7 23 14 25 C21 23 24 19 22 14 C20 9 14 6 14 6Z" stroke="rgba(232,181,90,0.8)" stroke-width="1.5" fill="none"/><path d="M14 10 L14 25" stroke="rgba(232,181,90,0.5)" stroke-width="1"/><path d="M10 14 L18 14 M9 18 L19 18 M11 22 L17 22" stroke="rgba(232,181,90,0.3)" stroke-width="0.8"/></svg> North<span>Med</span></a>
+  <ul class="nav-links"><li><a href="weight-loss.html">Weight Loss</a></li><li><a href="mens-health.html">Men's Health</a></li><li><a href="womens-health.html">Women's Health</a></li><li><a href="northmed-forest.html#how-it-works">How It Works</a></li></ul>
+  <button class="nav-cta" onclick="window.location='quiz.html'">Get Started</button>
+</nav>
+
+<div class="dark-hero" style="min-height:40vh;">
+  <div class="aurora"><div class="aurora-band aurora-band-1"></div></div>
+  <div class="hero-stars" id="heroStars"></div>
+  <div class="container hero-content-inner">
+    <div class="breadcrumb"><a href="northmed-forest.html">Home</a><span>/</span><span>Careers</span></div>
+    <div class="hero-badge">We Are Hiring</div>
+    <h1>Help us build <em>better</em> Canadian healthcare</h1>
+    <p class="hero-sub">We are a small, mission-driven team with a big goal: giving every Canadian access to the care they deserve, regardless of where they live. Come build with us.</p>
+  </div>
+</div>
+
+<div class="wave-top"><svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C480,56 960,0 1440,40 L1440,56 L0,56 Z" fill="var(--forest-deep)"/><path d="M0,0 C480,56 960,0 1440,40 L1440,0 Z" fill="var(--cream)"/></svg></div>
+
+<section style="background:var(--cream);">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto 3.5rem;" class="fade-in">
+      <span class="section-label">Why NorthMed</span>
+      <h2>A place where your work <em>matters</em></h2>
+    </div>
+    <div class="card-grid card-grid-4" style="margin-bottom:3rem;">
+      <div class="card fade-in" style="text-align:center;"><span class="card-icon">🌲</span><h3>Remote First</h3><p>Work from anywhere in Canada. We have been remote-first since day one.</p></div>
+      <div class="card fade-in fd1" style="text-align:center;"><span class="card-icon">🏥</span><h3>Health Benefits</h3><p>Full employer-paid health, dental, and vision. Plus a NorthMed care account for you and your family.</p></div>
+      <div class="card fade-in fd2" style="text-align:center;"><span class="card-icon">📚</span><h3>Learning Budget</h3><p>$2,000 per year for courses, conferences, and professional development.</p></div>
+      <div class="card fade-in fd3" style="text-align:center;"><span class="card-icon">🎯</span><h3>Real Impact</h3><p>The work you do directly affects the health and lives of real Canadians.</p></div>
+    </div>
+    <h2 class="fade-in" style="margin-bottom:2rem;">Open <em>Roles</em></h2>
+    <div class="card-grid card-grid-2"><div class="card fade-in" style="display:flex;flex-direction:column;gap:0.75rem;">
+  <div style="display:flex;align-items:flex-start;gap:1rem;">
+    <span style="font-size:1.75rem;">🩺</span>
+    <div style="flex:1;">
+      <h3 style="margin-bottom:0.35rem;">Physician (All Specialties)</h3>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <span class="tag">Remote, Canada-wide</span><span class="tag">Contract</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:0.9rem;color:#4A5E4F;line-height:1.7;">We are actively adding physicians across all provinces and specialties. Flexible scheduling, full administrative support, and competitive compensation.</p>
+  <a href="mailto:careers@northmed.ca?subject=Application: Physician (All Specialties)" class="btn-outline-dark" style="align-self:flex-start;">Apply Now</a>
+</div><div class="card fade-in" style="display:flex;flex-direction:column;gap:0.75rem;">
+  <div style="display:flex;align-items:flex-start;gap:1rem;">
+    <span style="font-size:1.75rem;">💻</span>
+    <div style="flex:1;">
+      <h3 style="margin-bottom:0.35rem;">Senior Full-Stack Engineer</h3>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <span class="tag">Remote, Canada</span><span class="tag">Full-time</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:0.9rem;color:#4A5E4F;line-height:1.7;">Join our product team to build the next generation of Canadian telehealth infrastructure. React, Node.js, PostgreSQL. Strong preference for engineers with healthcare experience.</p>
+  <a href="mailto:careers@northmed.ca?subject=Application: Senior Full-Stack Engineer" class="btn-outline-dark" style="align-self:flex-start;">Apply Now</a>
+</div><div class="card fade-in" style="display:flex;flex-direction:column;gap:0.75rem;">
+  <div style="display:flex;align-items:flex-start;gap:1rem;">
+    <span style="font-size:1.75rem;">🧑‍⚕️</span>
+    <div style="flex:1;">
+      <h3 style="margin-bottom:0.35rem;">Registered Nurse, Care Coordination</h3>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <span class="tag">Remote, Ontario / BC</span><span class="tag">Full-time</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:0.9rem;color:#4A5E4F;line-height:1.7;">Support patients through their care journey as a care coordinator. Strong clinical background required. RN registration with CNO or BCCNM required.</p>
+  <a href="mailto:careers@northmed.ca?subject=Application: Registered Nurse, Care Coordination" class="btn-outline-dark" style="align-self:flex-start;">Apply Now</a>
+</div><div class="card fade-in" style="display:flex;flex-direction:column;gap:0.75rem;">
+  <div style="display:flex;align-items:flex-start;gap:1rem;">
+    <span style="font-size:1.75rem;">📊</span>
+    <div style="flex:1;">
+      <h3 style="margin-bottom:0.35rem;">Growth Marketing Manager</h3>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <span class="tag">Remote, Canada</span><span class="tag">Full-time</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:0.9rem;color:#4A5E4F;line-height:1.7;">Own patient acquisition across paid and organic channels. Experience with regulated health marketing an asset. Minimum 5 years in performance marketing.</p>
+  <a href="mailto:careers@northmed.ca?subject=Application: Growth Marketing Manager" class="btn-outline-dark" style="align-self:flex-start;">Apply Now</a>
+</div><div class="card fade-in" style="display:flex;flex-direction:column;gap:0.75rem;">
+  <div style="display:flex;align-items:flex-start;gap:1rem;">
+    <span style="font-size:1.75rem;">🤝</span>
+    <div style="flex:1;">
+      <h3 style="margin-bottom:0.35rem;">Patient Success Specialist</h3>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <span class="tag">Remote, Canada</span><span class="tag">Full-time</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:0.9rem;color:#4A5E4F;line-height:1.7;">Be the voice of NorthMed for patients. Handle onboarding, support escalations, and work closely with the medical team to ensure every patient succeeds.</p>
+  <a href="mailto:careers@northmed.ca?subject=Application: Patient Success Specialist" class="btn-outline-dark" style="align-self:flex-start;">Apply Now</a>
+</div><div class="card fade-in" style="display:flex;flex-direction:column;gap:0.75rem;">
+  <div style="display:flex;align-items:flex-start;gap:1rem;">
+    <span style="font-size:1.75rem;">🔒</span>
+    <div style="flex:1;">
+      <h3 style="margin-bottom:0.35rem;">Privacy and Compliance Lead</h3>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <span class="tag">Remote, Canada</span><span class="tag">Full-time</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:0.9rem;color:#4A5E4F;line-height:1.7;">Own our PIPEDA compliance program, physician credentialing, and regulatory relationships. CIPP/C or equivalent certification preferred.</p>
+  <a href="mailto:careers@northmed.ca?subject=Application: Privacy and Compliance Lead" class="btn-outline-dark" style="align-self:flex-start;">Apply Now</a>
+</div></div>
+    <div class="fade-in" style="text-align:center;margin-top:3rem;padding:2.5rem;background:var(--mist);border-radius:var(--radius-lg);">
+      <h3>Do not see your role?</h3>
+      <p style="color:#4A5E4F;margin:0.75rem 0 1.5rem;">We are always interested in exceptional people. Send us a note.</p>
+      <a href="mailto:careers@northmed.ca" class="btn-primary">Send an Introduction</a>
+    </div>
+  </div>
+</section>
+
+<footer style="background:var(--forest-deep);color:rgba(255,255,255,0.45);padding:4rem 4rem 2rem;position:relative;overflow:hidden;">
+  <svg style="position:absolute;bottom:0;right:0;opacity:0.05;pointer-events:none;" viewBox="0 0 320 400" fill="none" width="280">
+    <path d="M160,380 L160,200" stroke="#4DAA72" stroke-width="4" stroke-linecap="round"/>
+    <path d="M160,200 L100,280 L130,280 L80,340 L115,340 L55,390" stroke="#4DAA72" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M160,200 L220,280 L190,280 L240,340 L205,340 L265,390" stroke="#4DAA72" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto 3rem;">
+    <div>
+      <a href="northmed-forest.html" style="font-family:var(--font-display);font-size:1.9rem;font-weight:600;color:var(--white);letter-spacing:-0.02em;text-decoration:none;display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+        <svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M14 2 L14 6 M14 6 C14 6 8 9 6 14 C4 19 7 23 14 25 C21 23 24 19 22 14 C20 9 14 6 14 6Z" stroke="rgba(232,181,90,0.7)" stroke-width="1.5" fill="none"/><path d="M14 10 L14 25" stroke="rgba(232,181,90,0.4)" stroke-width="1"/></svg>
+        North<span style="color:var(--amber-light);">Med</span>
+      </a>
+      <p style="font-size:0.85rem;line-height:1.75;color:rgba(255,255,255,0.35);font-weight:300;margin-bottom:1.5rem;max-width:280px;">Personalized telehealth care for Canadians. Licensed physicians, Health Canada regulated, shipped coast to coast.</p>
+      <div style="font-size:0.82rem;margin-bottom:0.4rem;">📧 <a href="mailto:hello@northmed.ca" style="color:rgba(255,255,255,0.4);text-decoration:none;">hello@northmed.ca</a></div>
+      <div style="font-size:0.82rem;margin-bottom:0.4rem;">📞 <a href="tel:+18005551234" style="color:rgba(255,255,255,0.4);text-decoration:none;">1-800-555-1234</a></div>
+      <div style="font-size:0.82rem;">📍 123 Bay Street, Suite 400, Toronto, ON M5H 2R4</div>
+    </div>
+    <div>
+      <h4 style="font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;">Services</h4>
+      <ul style="list-style:none;">
+        <li style="margin-bottom:0.65rem;"><a href="weight-loss.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Weight Loss</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="mens-health.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Men's Health</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="womens-health.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Women's Health</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="peptides.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Peptides &amp; Longevity</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="hair-restoration.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Hair Restoration</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="skincare.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Skincare</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;">Company</h4>
+      <ul style="list-style:none;">
+        <li style="margin-bottom:0.65rem;"><a href="about.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">About Us</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="physicians.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Our Physicians</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="pharmacies.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Partner Pharmacies</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="blog.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Blog</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="careers.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Careers</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="press.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Press</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;">Legal</h4>
+      <ul style="list-style:none;">
+        <li style="margin-bottom:0.65rem;"><a href="terms.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Terms &amp; Conditions</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="privacy.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Privacy Policy</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="medical-consent.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Medical Consent</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="refund.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Refund Policy</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="quiz.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Take the Assessment</a></li>
+        <li style="margin-bottom:0.65rem;"><a href="portal.html" style="font-size:0.875rem;color:rgba(255,255,255,0.4);text-decoration:none;">Patient Portal</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;">
+    <p style="font-size:0.78rem;">&#169; 2026 NorthMed Health Inc. All rights reserved. Serving Canadians nationwide.</p>
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+      <a href="terms.html" style="font-size:0.78rem;color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a>
+      <a href="privacy.html" style="font-size:0.78rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy (PIPEDA)</a>
+      <a href="medical-consent.html" style="font-size:0.78rem;color:rgba(255,255,255,0.3);text-decoration:none;">Medical Consent</a>
+      <a href="refund.html" style="font-size:0.78rem;color:rgba(255,255,255,0.3);text-decoration:none;">Refund Policy</a>
+    </div>
+  </div>
+  <p style="max-width:1200px;margin:1.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.04);font-size:0.7rem;color:rgba(255,255,255,0.18);line-height:1.7;">All physicians are licensed in the province in which the patient resides. Prescriptions issued only after consultation with a licensed Canadian provider. All medications dispensed by Health Canada registered pharmacies. Results may vary. Consult a healthcare professional before starting any medical program. PIPEDA compliant.</p>
+</footer>
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>60));
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+(function(){
+  const canvas=document.getElementById('leavesCanvas');
+  if(!canvas)return;
+  const svgs=['<svg viewBox="0 0 20 24" fill="none"><path d="M10,2 C10,2 2,8 2,14 C2,19 5.5,22 10,22 C14.5,22 18,19 18,14 C18,8 10,2 10,2Z" fill="currentColor"/><line x1="10" y1="22" x2="10" y2="24" stroke="currentColor" stroke-width="1.5"/></svg>','<svg viewBox="0 0 22 18" fill="none"><path d="M11,2 C11,2 3,6 2,11 C1,16 5,18 11,17 C17,18 21,16 20,11 C19,6 11,2 11,2Z" fill="currentColor"/></svg>'];
+  const colors=['#2E8A54','#4DAA72','#174D2E','#1E6B3E','#C2882A'];
+  for(let i=0;i<14;i++){
+    const w=document.createElement('div');w.className='leaf';
+    const size=10+Math.random()*14,left=Math.random()*100,dur=14+Math.random()*18,delay=-Math.random()*22;
+    const drift=(Math.random()-0.5)*180+'px',spin=(Math.random()-0.5)*600+'deg';
+    w.style.cssText=`left:${left}%;width:${size}px;height:${size}px;color:${colors[Math.floor(Math.random()*colors.length)]};--drift:${drift};--spin:${spin};animation-duration:${dur}s;animation-delay:${delay}s;`;
+    w.innerHTML=svgs[Math.floor(Math.random()*svgs.length)];
+    canvas.appendChild(w);
+  }
+})();
+document.querySelectorAll('.faq-question').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const open=btn.classList.contains('open');
+    document.querySelectorAll('.faq-question.open').forEach(b=>{b.classList.remove('open');b.nextElementSibling.classList.remove('open');});
+    if(!open){btn.classList.add('open');btn.nextElementSibling.classList.add('open');}
+  });
+});
+
+(function(){
+  const el=document.getElementById('heroStars');
+  if(!el)return;
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');s.className='star';
+    const size=Math.random()*2+0.5;
+    s.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*80}%;animation-duration:${2+Math.random()*4}s;animation-delay:${-Math.random()*5}s;`;
+    el.appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>

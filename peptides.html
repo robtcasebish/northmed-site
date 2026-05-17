@@ -9,8 +9,8 @@
 <style>
 :root{--forest-deep:#071810;--forest-dark:#0C2A1A;--forest:#174D2E;--forest-mid:#1E6B3E;--fern:#2E8A54;--moss:#4DAA72;--mist:#E6F0EA;--cream:#F4EEE2;--cream-dark:#E8E0D0;--amber:#C2882A;--amber-light:#E8B55A;--white:#FFFFFF;--font-display:'Cormorant Garamond',Georgia,serif;--font-body:'Plus Jakarta Sans',sans-serif;--radius:12px;--radius-lg:20px;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:var(--font-body);background:var(--cream);color:var(--forest-dark);overflow-x:hidden;line-height:1.6;}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(7,24,16,0.94);backdrop-filter:blur(16px);}
+body{font-family:var(--font-body);background:var(--cream);color:var(--forest-dark);overflow-x:hidden;line-height:1.6;padding-top:44px;}
+nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(7,24,16,0.94);backdrop-filter:blur(16px);}
 .nav-logo{font-family:var(--font-display);font-size:1.8rem;font-weight:600;color:var(--white);letter-spacing:-0.02em;text-decoration:none;}
 .nav-logo span{color:var(--amber-light);}
 .nav-cta{background:var(--amber);color:var(--white);border:none;padding:0.6rem 1.4rem;border-radius:100px;font-family:var(--font-body);font-size:0.875rem;font-weight:600;cursor:pointer;}
@@ -51,7 +51,7 @@ section{padding:5rem 4rem;}
   <button class="nav-cta" onclick="window.location='quiz.html'">Get Started</button>
 </nav>
 
-<div id="disclaimer-banner" style="background:#1a3a24;border-bottom:1px solid rgba(46,138,84,0.3);padding:0.65rem 2rem;text-align:center;position:relative;z-index:300;">
+<div id="disclaimer-banner" style="background:#1a3a24;border-bottom:1px solid rgba(46,138,84,0.3);padding:0.65rem 2rem;text-align:center;position:fixed;top:0;left:0;right:0;z-index:201;">
   <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);margin:0;line-height:1.5;">
     <strong style="color:rgba(255,255,255,0.85);">Medical Information Only.</strong>
     This website provides general health information to help you speak with a licensed physician. 

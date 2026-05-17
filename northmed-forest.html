@@ -64,7 +64,7 @@ body {
 
 /* ─── NAV ─── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  position: fixed; top: 44px; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.2rem 4rem;
   transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
@@ -627,7 +627,7 @@ footer { background: var(--forest-deep); color: rgba(255,255,255,0.45); padding:
   </ul>
   <button class="nav-cta" onclick="document.getElementById('weight-loss').scrollIntoView({behavior:'smooth'})">Get Started</button>
 </nav>
-<div id="disclaimer-banner" style="background:#1a3a24;border-bottom:1px solid rgba(46,138,84,0.3);padding:0.65rem 2rem;text-align:center;position:relative;z-index:300;">
+<div id="disclaimer-banner" style="background:#1a3a24;border-bottom:1px solid rgba(46,138,84,0.3);padding:0.65rem 2rem;text-align:center;position:fixed;top:0;left:0;right:0;z-index:201;">
   <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);margin:0;line-height:1.5;">
     <strong style="color:rgba(255,255,255,0.85);">Medical Information Only.</strong>
     This website provides general health information to help you speak with a licensed physician. 
@@ -896,9 +896,7 @@ footer { background: var(--forest-deep); color: rgba(255,255,255,0.45); padding:
           <div class="vis-forest-ring" style="width:160px;height:160px;animation-duration:6s;"></div>
           <div class="vis-forest-ring" style="width:108px;height:108px;animation-duration:6s;animation-delay:-3s;"></div>
           <img src="images/mens-health-hero.png" alt="Men's health" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:16px;">
-          <div class="feature-badge-float">
-            <p>Care for energy, hormones &amp; performance</p>
-            <div class="fbf-title">Built for men who expect more</div>
+          
           </div>
         </div>
       </div>
@@ -951,7 +949,6 @@ footer { background: var(--forest-deep); color: rgba(255,255,255,0.45); padding:
           <li><div class="check-icon" style="background:#5a5000;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Personalized protocols to physician monitored</li>
         </ul>
         <div class="feature-tags">
-          <span class="feature-tag">longevity</span><span class="feature-tag">longevity</span>
           <span class="feature-tag">Longevity</span><span class="feature-tag">Anti-Aging</span><span class="feature-tag">Recovery</span>
         </div>
         <a href="#" class="btn-primary" style="margin-top:2rem;display:inline-block;background:var(--amber);">Learn More <span class="coming-soon">Coming Soon</span></a>
@@ -980,7 +977,7 @@ footer { background: var(--forest-deep); color: rgba(255,255,255,0.45); padding:
       <div>
         <span class="section-label">Hair Restoration</span>
         <h2>Proven care for thinning hair and <em>regrowth</em></h2>
-        <p class="section-sub">Revitalize your roots and restore fuller-looking hair with powerful regrowth treatments formulated to nourish the scalp and support visibly thicker, healthier strands.</p>
+        <p class="section-sub">Physician assessment of hair loss and thinning, with a discussion of clinically appropriate treatment options for your individual situation.</p>
         <ul class="feature-checklist">
           <li><div class="check-icon" style="background:#4a1a7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Clinically-backed regrowth ingredients (minoxidil, finasteride)</li>
           <li><div class="check-icon" style="background:#4a1a7a;"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Targeted scalp and follicle support</li>
